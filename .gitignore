@@ -1,0 +1,18 @@
+# Java/Spring Boot ignores
+target/
+*.class
+*.jar
+*.war
+*.db
+
+# Node/React ignores
+node_modules/
+dist/
+build/
+.env
+*.log
+
+# IDE ignores
+.idea/
+.vscode/
+*.iml
