@@ -1,36 +1,36 @@
-import { Search, Plus, Pencil, Trash, UserSquare } from "lucide-react";
+import { useState } from "react";
+import { Plus, Menu as MenuIcon, X } from "lucide-react";
+import PropTypes from "prop-types";
 
-const Menu = () => {
-  return (
-    <div className="p-4 bg-gray-800 text-white rounded-lg shadow-md">
-      <h2 className="text-lg font-semibold mb-4">Menu</h2>
-      <div className="space-y-2">
-        <div className="mb-2">
-          <label className="block text-sm font-medium mb-1">Pagination:</label>
-          <select className="w-full p-2 border border-gray-700 rounded bg-gray-900 text-white">
-            <option value="1000">Seach by 1,000</option>
-            <option value="10000">Seach by 10,000</option>
-            <option value="all">Search All</option>
-          </select>
+const Menu = ({ onAddContact }) => {
+    const [isCollapsed, setIsCollapsed] = useState(false);
+
+    return (
+        <div className={`${isCollapsed ? "w-16" : "w-64"} p-4 bg-white border-r border-gray-200 shadow-sm transition-all duration-300`}>
+            {/* Collapse Toggle Button */}
+            <button
+                onClick={() => setIsCollapsed(!isCollapsed)}
+                className="p-2 mb-4 bg-gray-100 hover:bg-gray-200 rounded-lg focus:ring-2 focus:ring-gray-500"
+            >
+                {isCollapsed ? <MenuIcon size={20} /> : <X size={20} />}
+            </button>
+
+            {/* Buttons */}
+            <div className="space-y-3">
+                <button
+                    onClick={onAddContact}
+                    className="w-full flex items-center justify-start p-2 bg-blue-100 hover:bg-blue-200 rounded-lg text-blue-800 transition-all focus:ring-2 focus:ring-blue-500"
+                >
+                    <Plus className="mr-2" size={16} /> {!isCollapsed && "Add New"}
+                </button>
+                {/* Add other buttons here */}
+            </div>
         </div>
-        <button className="w-full flex items-center justify-center p-2 bg-blue-500 hover:bg-blue-600 rounded">
-          <UserSquare className="mr-2" /> Search by ID
-        </button>
-        <button className="w-full flex items-center justify-center p-2 bg-blue-500 hover:bg-blue-600 rounded">
-          <Search className="mr-2" /> Search All
-        </button>
-        <button className="w-full flex items-center justify-center p-2 bg-yellow-500 hover:bg-yellow-600 rounded">
-          <Plus className="mr-2" /> Add New Contact
-        </button>
-        <button className="w-full flex items-center justify-center p-2 bg-indigo-500 hover:bg-indigo-600 rounded">
-          <Pencil className="mr-2" /> Update Contact (by ID)
-        </button>
-        <button className="w-full flex items-center justify-center p-2 bg-red-500 hover:bg-red-600 rounded">
-          <Trash className="mr-2" /> Delete Contact (by ID)
-        </button>
-      </div>
-    </div>
-  )
-}
+    );
+};
 
-export default Menu
+Menu.propTypes = {
+    onAddContact: PropTypes.func.isRequired,
+};
+
+export default Menu;

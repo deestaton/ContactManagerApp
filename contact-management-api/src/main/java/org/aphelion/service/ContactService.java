@@ -131,4 +131,9 @@ public class ContactService {
             return pstmt.executeUpdate() > 0;
         }
     }
+
+    public boolean toggleFavorite(Long id) {
+        System.out.println("Favorite Toggled!");
+        return true;
+    }
 }
