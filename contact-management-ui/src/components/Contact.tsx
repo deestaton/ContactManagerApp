@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 interface ContactProps {
     id: number;
+    photo?: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -17,6 +18,7 @@ interface ContactProps {
 
 const Contact = ({ 
     id, 
+    photo,
     firstName, 
     lastName, 
     email, 
@@ -45,9 +47,17 @@ const Contact = ({
 
             {/* Avatar */}
             <div className="flex justify-center mb-4">
-                <div className="w-20 h-20 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-2xl">
-                    {firstName?.[0] || "?"}
-                </div>
+                {photo ? (
+                    <img 
+                        src={photo}
+                        alt={`${firstName} ${lastName}`}
+                        className="w-20 h-20 rounded-full object-cover"
+                    />
+                ) : (
+                    <div className="w-20 h-20 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-2xl">
+                        {firstName?.[0] || "?"}
+                    </div>
+                )}
             </div>
 
             {/* Contact Details */}

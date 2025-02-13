@@ -9,6 +9,7 @@ const ContactForm = ({ contact, onSubmit, onClose, isEditMode }) => {
         email: contact?.email || "",
         phone: contact?.phone || "",
         address: contact?.address || "",
+        photo: contact?.photo || "",
     });
 
     const handleChange = (e) => {
@@ -84,6 +85,22 @@ const ContactForm = ({ contact, onSubmit, onClose, isEditMode }) => {
                         className="w-full p-2 border border-gray-300 rounded-lg"
                         required
                     />
+                    <label className="block text-sm font-medium mb-1">Photo</label>
+                    <input 
+                        type="file"
+                        name="photo"
+                        onChange={(e) => {
+                            const file = e.target.files[0];
+                            if (file) {
+                                const reader = new FileReader();
+                                reader.onloadend = () => {
+                                    setFormData({ ...formData, photo: reader.result });
+                                };
+                                reader.readAsDataURL(file);
+                            }
+                        }}
+                        className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
                 </div>
 
                 <div className="mt-6 flex justify-end space-x-4">
@@ -111,6 +128,7 @@ const ContactForm = ({ contact, onSubmit, onClose, isEditMode }) => {
 ContactForm.propTypes = {
     contact: PropTypes.shape({
         id: PropTypes.number,
+        photo: PropTypes.string,
         firstName: PropTypes.string,
         lastName: PropTypes.string,
         email: PropTypes.string,
